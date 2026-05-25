@@ -23,7 +23,7 @@ export default function Navbar({ page, go }) {
         <div className="nav-logo" onClick={() => nav("Home")}>
           <div className="nav-emblem">
             <img
-              src="/aimsta-logo.png"
+              src="/AIMSTA_LOGO_ONLY.png"
               alt="AIMSTA logo"
               style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 10 }}
             />

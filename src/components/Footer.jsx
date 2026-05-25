@@ -1,5 +1,5 @@
 // src/components/Footer.jsx
-import Ico from "./Icon.jsx";
+import Ico from "./Icon";
 
 export default function Footer({ go }) {
   return (
@@ -12,7 +12,7 @@ export default function Footer({ go }) {
             <div style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: ".25rem" }}>
               <div className="nav-emblem" style={{ width: 40, height: 40 }}>
                 <img
-                  src="/aimsta-logo.png"
+                  src="/AIMSTA_LOGO_ONLY.png"
                   alt="AIMSTA logo"
                   style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 8 }}
                 />
