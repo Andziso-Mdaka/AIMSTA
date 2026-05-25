@@ -1,4 +1,4 @@
-// src/pages/CoursesPage.jsx
+// src/Pages/CoursesPage.jsx
 import Footer    from "../components/Footer.jsx";
 import StatStrip from "../components/StatStrip.jsx";
 import Ico       from "../components/Icon.jsx";
@@ -19,8 +19,8 @@ export default function CoursesPage({ go }) {
   return (
     <>
       {/* ═══════════════════════════════════ COURSE CARDS ═══ */}
-      <section className="sec sec-light">
-        <div className="sec-inner">
+      <section className="courses sec sec-light" id="courses">
+        <div className="container sec-inner">
           <div {...r1("sec-hd")}>
             <span className="eyebrow eyebrow-dark">Featured Courses</span>
             <h2 className="sec-title" style={{ color: "var(--ink)" }}>
@@ -35,12 +35,12 @@ export default function CoursesPage({ go }) {
 
           <div className="courses-grid">
             {COURSES.map((c, i) => (
-              <div key={i} {...r1()} style={{ transitionDelay: `${i * .1}s` }}>
-                <div className="course-card">
-                  <div className="course-thumb">
+              <div key={i} {...r1(`course-${i}`)} style={{ transitionDelay: `${i * .1}s` }}>
+                <div className="course-card animate-on-scroll visible">
+                  <div className="course-image">
                     <span className="course-badge">{c.badge}</span>
                   </div>
-                  <div className="course-body">
+                  <div className="course-content">
                     <div className="course-meta">
                       <span><Ico n="clock" s={13} /> {c.weeks} weeks</span>
                       <span><Ico n="users" s={13} /> {c.students} enrolled</span>
@@ -49,9 +49,9 @@ export default function CoursesPage({ go }) {
                     <p>{c.desc}</p>
                     <div className="course-footer">
                       <div className="course-price">
-                        {c.price} <s>{c.orig}</s>
+                        {c.price} <span>{c.orig}</span>
                       </div>
-                      <button className="course-enroll" onClick={() => go("Contact")}>
+                      <button className="enroll-btn" onClick={() => go("Contact")}>
                         Enroll Now
                       </button>
                     </div>
@@ -67,8 +67,8 @@ export default function CoursesPage({ go }) {
       <StatStrip />
 
       {/* ═══════════════════════════════════ PERKS ═══ */}
-      <section className="sec sec-mid">
-        <div className="sec-inner">
+      <section className="services sec sec-mid">
+        <div className="container sec-inner">
           <div {...r2("sec-hd")}>
             <span className="eyebrow eyebrow-gold">What's Included</span>
             <h2 className="sec-title" style={{ color: "var(--cream)" }}>
@@ -79,11 +79,11 @@ export default function CoursesPage({ go }) {
             </p>
           </div>
 
-          <div className="serv-grid">
+          <div className="services-grid">
             {PERKS.map(([emoji, title, desc], i) => (
-              <div key={i} {...r2()} style={{ transitionDelay: `${i * .08}s` }}>
-                <div className="serv-card">
-                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{emoji}</div>
+              <div key={i} {...r2(`perk-${i}`)} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="service-card animate-on-scroll visible">
+                  <div className="service-icon" style={{ fontSize: "1.4rem" }}>{emoji}</div>
                   <h3>{title}</h3>
                   <p>{desc}</p>
                 </div>

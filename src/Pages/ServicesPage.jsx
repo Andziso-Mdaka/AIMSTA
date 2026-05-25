@@ -1,7 +1,7 @@
-// src/pages/ServicesPage.jsx
+// src/Pages/ServicesPage.jsx
 import Footer from "../components/Footer.jsx";
 import Ico    from "../components/Icon.jsx";
-import { useReveal } from "../hooks.jsx";
+import { useReveal } from "../hooks.jsx"; // Standardized path pathing
 import { SERVICES } from "../data.jsx";
 
 const INCLUDED = [
@@ -18,8 +18,9 @@ export default function ServicesPage({ go }) {
   return (
     <>
       {/* ═══════════════════════════════════ ALL SERVICES ═══ */}
-      <section className="sec sec-mid">
-        <div className="sec-inner">
+      {/* Wrapped inside the master 'services' class to enable grid system layout */}
+      <section className="services sec sec-mid" id="services">
+        <div className="container sec-inner">
           <div {...r1("sec-hd")}>
             <span className="eyebrow eyebrow-gold">All Programmes</span>
             <h2 className="sec-title" style={{ color: "var(--cream)" }}>
@@ -30,11 +31,11 @@ export default function ServicesPage({ go }) {
             </p>
           </div>
 
-          <div className="serv-grid">
+          <div className="services-grid">
             {SERVICES.map((s, i) => (
-              <div key={i} {...r1()} style={{ transitionDelay: `${i * .08}s` }}>
-                <div className="serv-card">
-                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{s.icon}</div>
+              <div key={i} {...r1(`serv-${i}`)} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="service-card animate-on-scroll visible">
+                  <div className="service-icon" style={{ fontSize: "1.4rem" }}>{s.icon}</div>
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>
                 </div>
@@ -45,8 +46,8 @@ export default function ServicesPage({ go }) {
       </section>
 
       {/* ═══════════════════════════════════ WHAT'S INCLUDED ═══ */}
-      <section className="sec" style={{ background: "var(--ink)" }}>
-        <div className="sec-inner">
+      <section className="services sec" style={{ background: "var(--ink)" }}>
+        <div className="container sec-inner">
           <div {...r2("sec-hd")}>
             <span className="eyebrow eyebrow-gold">Included in Every Course</span>
             <h2 className="sec-title" style={{ color: "var(--cream)" }}>
@@ -57,11 +58,11 @@ export default function ServicesPage({ go }) {
             </p>
           </div>
 
-          <div className="serv-grid">
+          <div className="services-grid">
             {INCLUDED.map(([emoji, title, desc], i) => (
-              <div key={i} {...r2()} style={{ transitionDelay: `${i * .08}s` }}>
-                <div className="serv-card">
-                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{emoji}</div>
+              <div key={i} {...r2(`inc-${i}`)} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="service-card animate-on-scroll visible">
+                  <div className="service-icon" style={{ fontSize: "1.4rem" }}>{emoji}</div>
                   <h3>{title}</h3>
                   <p>{desc}</p>
                 </div>
