@@ -1,12 +1,12 @@
 // src/App.jsx — root component, wires everything together
 import { useState } from "react";
-import { CSS } from "./styles";
-import Navbar        from "./components/Navbar";
-import HomePage      from "./pages/HomePage";
-import AboutPage     from "./pages/AboutPage";
-import ServicesPage  from "./pages/ServicesPage";
-import CoursesPage   from "./pages/CoursesPage";
-import ContactPage   from "./pages/ContactPage";
+import { CSS }       from "./styles.jsx";
+import Navbar        from "./components/Navbar.jsx";
+import HomePage      from "./pages/HomePage.jsx";
+import AboutPage     from "./pages/AboutPage.jsx";
+import ServicesPage  from "./pages/ServicesPage.jsx";
+import CoursesPage   from "./pages/CoursesPage.jsx";
+import ContactPage   from "./pages/ContactPage.jsx";
 
 const PAGES = {
   Home:     HomePage,

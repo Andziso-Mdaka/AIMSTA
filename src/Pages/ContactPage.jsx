@@ -1,9 +1,9 @@
 // src/pages/ContactPage.jsx
 import { useState } from "react";
-import Footer from "../components/Footer";
-import Ico    from "../components/Icon";
-import { useReveal } from "../hooks";
-import { SERVICES } from "../data";
+import Footer from "../components/Footer.jsx";
+import Ico    from "../components/Icon.jsx";
+import { useReveal } from "../hooks.jsx";
+import { SERVICES } from "../data.jsx";
 
 const CONTACT_ITEMS = [
   ["mail",  "Email",    "info@aimsta.com"],

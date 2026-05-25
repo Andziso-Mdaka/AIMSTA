@@ -1,10 +1,9 @@
 // src/pages/HomePage.jsx
-import Footer    from "../components/Footer";
-import StatStrip from "../components/StatStrip";
-import Ico       from "../components/Icon";
-import { useReveal } from "../hooks";
-import { SERVICES, TESTIMONIALS } from "../data";
-
+import Footer    from "../components/Footer.jsx";
+import StatStrip from "../components/StatStrip.jsx";
+import Ico       from "../components/Icon.jsx";
+import { useReveal } from "../hooks.jsx";
+import { SERVICES, TESTIMONIALS } from "../data.jsx";
 
 export default function HomePage({ go }) {
   const r1 = useReveal();

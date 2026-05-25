@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 import { useState, useEffect } from "react";
-import Ico from "./Icon";
+import Ico from "./Icon.jsx";
 
 const LINKS = ["Home", "About", "Services", "Courses", "Contact"];
 
@@ -23,7 +23,7 @@ export default function Navbar({ page, go }) {
         <div className="nav-logo" onClick={() => nav("Home")}>
           <div className="nav-emblem">
             <img
-              src="/AIMSTA LOGO 2 - Copy.png"
+              src="/aimsta-logo.png"
               alt="AIMSTA logo"
               style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 10 }}
             />

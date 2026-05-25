@@ -1,8 +1,8 @@
 // src/pages/ServicesPage.jsx
-import Footer from "../components/Footer";
-import Ico    from "../components/Icon";
-import { useReveal } from "../hooks";
-import { SERVICES } from "../data";
+import Footer from "../components/Footer.jsx";
+import Ico    from "../components/Icon.jsx";
+import { useReveal } from "../hooks.jsx";
+import { SERVICES } from "../data.jsx";
 
 const INCLUDED = [
   ["🎯", "Personalised Mentorship", "One-on-one sessions with your assigned industry mentor throughout the programme."],

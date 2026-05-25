@@ -1,9 +1,9 @@
 // src/pages/CoursesPage.jsx
-import Footer    from "../components/Footer";
-import StatStrip from "../components/StatStrip";
-import Ico       from "../components/Icon";
-import { useReveal } from "../hooks";
-import { COURSES } from "../data";
+import Footer    from "../components/Footer.jsx";
+import StatStrip from "../components/StatStrip.jsx";
+import Ico       from "../components/Icon.jsx";
+import { useReveal } from "../hooks.jsx";
+import { COURSES } from "../data.jsx";
 
 const PERKS = [
   ["🎓", "Live Sessions",      "Interactive classes with expert trainers. Real questions, real answers, in real time."],

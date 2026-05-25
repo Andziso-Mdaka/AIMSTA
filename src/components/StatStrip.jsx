@@ -1,5 +1,5 @@
 // src/components/StatStrip.jsx
-import { STATS } from "../data";
+import { STATS } from "../data.jsx";
 
 export default function StatStrip() {
   return (

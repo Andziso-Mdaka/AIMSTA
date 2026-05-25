@@ -1,8 +1,8 @@
 // src/pages/AboutPage.jsx
-import Footer    from "../components/Footer";
-import StatStrip from "../components/StatStrip";
-import Ico       from "../components/Icon";
-import { useReveal } from "../hooks";
+import Footer    from "../components/Footer.jsx";
+import StatStrip from "../components/StatStrip.jsx";
+import Ico       from "../components/Icon.jsx";
+import { useReveal } from "../hooks.jsx";
 
 const FEATURES = [
   "Industry-Aligned Curriculum, rebuilt quarterly",
