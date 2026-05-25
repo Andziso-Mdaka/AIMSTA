@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { CSS }       from "./styles.jsx";
 import Navbar        from "./components/Navbar.jsx";
-import HomePage      from "./pages/HomePage.jsx";
-import AboutPage     from "./pages/AboutPage.jsx";
-import ServicesPage  from "./pages/ServicesPage.jsx";
-import CoursesPage   from "./pages/CoursesPage.jsx";
-import ContactPage   from "./pages/ContactPage.jsx";
+import HomePage from "./Pages/HomePage.jsx";
+import AboutPage from "./Pages/AboutPage.jsx";
+import ServicesPage from "./Pages/ServicesPage.jsx";
+import CoursesPage from "./Pages/CoursesPage.jsx";
+import ContactPage from "./Pages/ContactPage.jsx";
 
 const PAGES = {
   Home:     HomePage,
