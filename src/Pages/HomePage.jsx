@@ -1,245 +1,161 @@
-// pages/HomePage.jsx
-import Footer      from "../components/Footer";
-import FadeSection from "../components/FadeSection";
-import { Icon, SERVICES, TESTIMONIALS } from "../data";
+// src/pages/HomePage.jsx
+import Footer    from "../components/Footer";
+import StatStrip from "../components/StatStrip";
+import Ico       from "../components/Icon";
+import { useReveal } from "../hooks";
+import { SERVICES, TESTIMONIALS } from "../data";
 
-export default function HomePage({ setPage }) {
-  const nav = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); };
+
+export default function HomePage({ go }) {
+  const r1 = useReveal();
+  const r2 = useReveal();
+  const r3 = useReveal();
 
   return (
-    <div className="page">
+    <>
+      {/* ═══════════════════════════════════ HERO ═══ */}
+      <section className="hero">
+        <div className="hero-inner">
 
-      {/* ── HERO ── */}
-      <section
-        style={{
-          minHeight: "calc(100vh - var(--nav-h))",
-          background: "linear-gradient(135deg, var(--light-gray) 0%, var(--pale-green) 50%, var(--light-gray) 100%)",
-          display: "flex",
-          alignItems: "center",
-          position: "relative",
-          overflow: "hidden",
-          padding: "0 1.5rem",
-        }}
-      >
-        {/* decorative orb */}
-        <div
-          style={{
-            position: "absolute", top: "-20%", right: "-10%",
-            width: 600, height: 600, borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(10,138,60,.06) 0%, transparent 70%)",
-            animation: "float-bg 10s ease-in-out infinite",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div
-          style={{
-            maxWidth: 1200, margin: "0 auto", width: "100%",
-            padding: "4rem 0",
-            display: "grid",
-            gridTemplateColumns: "clamp(280px,50%,560px) 1fr",
-            gap: "4rem",
-            alignItems: "center",
-            position: "relative", zIndex: 1,
-          }}
-          className="hero-inner-grid"
-        >
-          {/* Left — text */}
-          <div style={{ animation: "fadeInUp .9s ease" }}>
-            {/* Badge */}
-            <div
-              style={{
-                display: "inline-flex", alignItems: "center", gap: ".5rem",
-                background: "rgba(10,138,60,.1)", color: "var(--primary-green)",
-                border: "1px solid rgba(10,138,60,.2)",
-                padding: ".4rem 1rem", borderRadius: 50,
-                fontSize: ".8rem", fontWeight: 600, marginBottom: "1.5rem",
-                letterSpacing: ".5px",
-              }}
-            >
-              <span style={{ animation: "sparkle 2s infinite", display: "inline-flex" }}>
-                <Icon name="star" size={12} />
-              </span>
+          {/* Left: copy */}
+          <div style={{ animation: "fadeInUp .9s ease .1s both" }}>
+            <div className="hero-eyebrow">
+              <span className="hero-eyebrow-dot" />
               Leading Training Institute
             </div>
 
-            <h1 style={{ fontSize: "clamp(2.2rem,5vw,3.6rem)", marginBottom: "1.25rem", color: "var(--dark-gray)" }}>
-              Transform Your Future with{" "}
-              <span
-                style={{
-                  color: "var(--primary-green)", position: "relative",
-                  display: "inline-block",
-                }}
-              >
-                AIMSTA
-                <span
-                  style={{
-                    position: "absolute", bottom: 5, left: 0, right: 0,
-                    height: 8, background: "rgba(10,138,60,.18)",
-                    borderRadius: 4, zIndex: -1,
-                  }}
-                />
-              </span>
+            <h1 className="hero-h1">
+              Transform<br />Your Future<br />with <em>AIMSTA</em>
             </h1>
 
-            <p style={{ fontSize: "1.1rem", color: "var(--medium-gray)", lineHeight: 1.75, marginBottom: "2rem", maxWidth: 500 }}>
-              Empowering students with cutting-edge skills and knowledge. Join thousands of successful graduates who
-              have shaped their careers through our excellence-driven training programs.
+            <p className="hero-sub">
+              Empowering ambitious professionals with cutting-edge skills and industry-proven knowledge.
+              Join 15,000+ graduates who chose excellence.
             </p>
 
-            {/* Buttons */}
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "3rem" }}>
-              <button className="btn-primary" onClick={() => nav("Courses")}>
-                Explore Courses <Icon name="arrow" size={16} />
+            <div className="hero-btns">
+              <button className="btn-gold" onClick={() => go("Courses")}>
+                Explore Courses <Ico n="arrow" s={16} />
               </button>
-              <button className="btn-ghost" onClick={() => nav("About")}>
-                <Icon name="play" size={16} /> Learn More
+              <button className="btn-outline" onClick={() => go("About")}>
+                <Ico n="play" s={16} /> Our Story
               </button>
             </div>
 
-            {/* Stats */}
-            <div style={{ display: "flex", gap: "2.5rem", flexWrap: "wrap" }}>
-              {[["15K+", "Students Trained"], ["98%", "Success Rate"], ["50+", "Expert Trainers"]].map(([n, l]) => (
+            <div className="hero-metrics">
+              {[["15K+","Graduates"],["98%","Success Rate"],["50+","Expert Mentors"]].map(([n, l]) => (
                 <div key={l}>
-                  <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "2rem", fontWeight: 700, color: "var(--primary-green)" }}>{n}</div>
-                  <div style={{ fontSize: ".8rem", color: "var(--medium-gray)", fontWeight: 500 }}>{l}</div>
+                  <div className="metric-num">{n}</div>
+                  <div className="metric-lbl">{l}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right — visual card */}
-          <div style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div
-              style={{
-                width: "100%", maxWidth: 400, aspectRatio: "1",
-                background: "var(--gradient-2)",
-                borderRadius: 32, color: "#fff",
-                display: "flex", flexDirection: "column",
-                alignItems: "center", justifyContent: "center", gap: "1rem",
-                boxShadow: "0 20px 60px rgba(10,138,60,0.3)",
-                animation: "cardIn .8s ease .1s both",
-              }}
-            >
-              <Icon name="graduation" size={72} style={{ opacity: .85 }} />
-              <p style={{ fontSize: "1.1rem", fontWeight: 500, opacity: .9 }}>Excellence in Education</p>
+          {/* Right: visual cards */}
+          <div className="hero-panel">
+            <div className="hero-card-main">
+              <div className="hero-card-icon"><Ico n="grad" /></div>
+              <h3>Excellence in Education</h3>
+              <p>10+ years shaping careers across every industry</p>
             </div>
 
-            {/* Floating pills */}
-            {[
-              { top: "10%", right: "-4%", label: "Certified Programs",  icon: "award",     delay: ".4s" },
-              { bottom: "12%", left: "-4%", label: "Expert Mentorship", icon: "users",     delay: ".6s" },
-            ].map(({ label, icon, delay, ...pos }) => (
-              <div
-                key={label}
-                style={{
-                  position: "absolute", ...pos,
-                  background: "#fff", borderRadius: 50,
-                  padding: ".65rem 1.1rem",
-                  display: "flex", alignItems: "center", gap: ".5rem",
-                  fontSize: ".82rem", fontWeight: 600, color: "var(--dark-gray)",
-                  boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-                  animation: `floatIn .6s ease ${delay} both`,
-                  zIndex: 2,
-                }}
-              >
-                <div style={{ width: 8, height: 8, background: "var(--light-green)", borderRadius: "50%", flexShrink: 0 }} />
-                <Icon name={icon} size={14} />
-                {label}
+            <div className="hero-badges-row">
+              {[
+                ["🏆", "Certified",  "Industry-recognised credentials"],
+                ["🌍", "Global",     "Alumni in 40+ countries"],
+                ["⚡", "Fast-Track", "Results within 90 days"],
+                ["🤝", "Mentored",   "1-on-1 expert guidance"],
+              ].map(([emoji, title, sub], i) => (
+                <div className="hero-mini-card" key={title} style={{ animationDelay: `${.3 + i * .1}s` }}>
+                  <div className="hmc-icon" style={{ fontSize: "1.1rem" }}>{emoji}</div>
+                  <div className="hmc-label">{title}</div>
+                  <div className="hmc-sub">{sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════ STATS ═══ */}
+      <StatStrip />
+
+      {/* ═══════════════════════════════════ SERVICES PREVIEW ═══ */}
+      <section className="sec sec-mid">
+        <div className="sec-inner">
+          <div {...r1("sec-hd")}>
+            <span className="eyebrow eyebrow-gold">What We Offer</span>
+            <h2 className="sec-title" style={{ color: "var(--cream)" }}>
+              Built for the <span className="ital">careers</span> of tomorrow
+            </h2>
+            <p className="sec-sub sec-sub-light">
+              Every programme is engineered with one goal: getting you where you want to be, faster.
+            </p>
+          </div>
+
+          <div className="serv-grid">
+            {SERVICES.map((s, i) => (
+              <div key={i} {...r1()} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="serv-card">
+                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{s.icon}</div>
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Responsive stacking for mobile */}
-        <style>{`
-          @media (max-width: 900px) {
-            .hero-inner-grid {
-              grid-template-columns: 1fr !important;
-              text-align: center;
-              gap: 2.5rem !important;
-            }
-            .hero-inner-grid > div:first-child { order: 2; }
-            .hero-inner-grid > div:last-child  { order: 1; }
-            .hero-inner-grid p,
-            .hero-inner-grid h1 { max-width: 100% !important; }
-            .hero-inner-grid > div:first-child > div { justify-content: center; }
-          }
-        `}</style>
       </section>
 
-      {/* ── SERVICES PREVIEW ── */}
-      <section className="section">
-        <div className="section-inner">
-          <FadeSection className="section-header">
-            <span className="section-tag">Our Services</span>
-            <h2 className="section-title">Comprehensive Learning Solutions</h2>
-            <p className="section-sub">
-              We offer a wide range of professional training programs designed to meet industry demands and
-              accelerate your career growth.
+      {/* ═══════════════════════════════════ TESTIMONIALS ═══ */}
+      <section className="sec" style={{ background: "var(--ink)" }}>
+        <div className="sec-inner">
+          <div {...r2("sec-hd")}>
+            <span className="eyebrow eyebrow-gold">Testimonials</span>
+            <h2 className="sec-title" style={{ color: "var(--cream)" }}>
+              Graduates who <span className="ital">transformed</span>
+            </h2>
+            <p className="sec-sub sec-sub-light">
+              Don't take our word for it — hear from the people whose careers we've changed.
             </p>
-          </FadeSection>
-
-          <div className="services-grid">
-            {SERVICES.map((s, i) => (
-              <FadeSection key={i}>
-                <div className="service-card">
-                  <div className="service-icon"><Icon name={s.icon} size={22} /></div>
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
-                </div>
-              </FadeSection>
-            ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ── */}
-      <section className="section section-dark">
-        <div className="section-inner">
-          <FadeSection className="section-header">
-            <span className="section-tag light">Testimonials</span>
-            <h2 className="section-title light">What Our Students Say</h2>
-            <p className="section-sub light">
-              Hear from alumni who have transformed their careers through AIMSTA's training programs.
-            </p>
-          </FadeSection>
 
           <div className="test-grid">
             {TESTIMONIALS.map((t, i) => (
-              <FadeSection key={i}>
+              <div key={i} {...r2()} style={{ transitionDelay: `${i * .12}s` }}>
                 <div className="test-card">
                   <div className="stars">★★★★★</div>
-                  <p className="test-text">"{t.text}"</p>
+                  <p className="test-txt">"{t.text}"</p>
                   <div className="test-author">
-                    <div className="test-avatar">{t.initials}</div>
+                    <div className="test-av">{t.initials}</div>
                     <div>
                       <div className="test-name">{t.name}</div>
                       <div className="test-role">{t.role}</div>
                     </div>
                   </div>
                 </div>
-              </FadeSection>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="cta-section">
-        <div className="cta-inner">
-          <h2>Ready to Start Your Journey?</h2>
+      {/* ═══════════════════════════════════ CTA ═══ */}
+      <section className="cta-band">
+        <div className="cta-inner" {...r3()}>
+          <h2>Ready to <em>invest</em> in yourself?</h2>
           <p>
-            Join thousands of successful professionals who have transformed their careers with AIMSTA.
-            Enroll today and take the first step towards excellence.
+            Join thousands of professionals who chose AIMSTA and never looked back.
+            Your next chapter starts with one decision.
           </p>
-          <button className="btn-white" onClick={() => nav("Contact")}>
-            Get Started Today
+          <button className="btn-cream" onClick={() => go("Contact")}>
+            Start Your Journey <Ico n="arrow" s={16} />
           </button>
         </div>
       </section>
 
-      <Footer setPage={setPage} />
-    </div>
+      <Footer go={go} />
+    </>
   );
 }

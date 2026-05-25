@@ -1,74 +1,68 @@
-// components/Navbar.jsx
+// src/components/Navbar.jsx
 import { useState, useEffect } from "react";
-import { Icon } from "../data";
+import Ico from "./Icon";
 
 const LINKS = ["Home", "About", "Services", "Courses", "Contact"];
 
-export default function Navbar({ page, setPage }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen]         = useState(false);
+export default function Navbar({ page, go }) {
+  const [solid, setSolid] = useState(false);
+  const [open, setOpen]   = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setSolid(window.scrollY > 50);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const navigate = (target) => {
-    setPage(target);
-    setOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const nav = (p) => { go(p); setOpen(false); };
 
   return (
     <>
-      <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
-        <div className="nav-container">
-
-          {/* Logo */}
-          <div className="nav-logo" onClick={() => navigate("Home")}>
-            <div className="nav-logo-mark">A</div>
-            <div className="nav-logo-text">
-              <span className="nav-logo-name">AIMSTA</span>
-              <span className="nav-logo-tag">Efficacy for Excellence</span>
-            </div>
+      <nav className={`nav${solid ? " solid" : ""}`}>
+        {/* Logo */}
+        <div className="nav-logo" onClick={() => nav("Home")}>
+          <div className="nav-emblem">
+            <img
+              src="/AIMSTA LOGO 2 - Copy.png"
+              alt="AIMSTA logo"
+              style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 10 }}
+            />
           </div>
-
-          {/* Desktop links */}
-          <ul className="nav-links">
-            {LINKS.map((link) => (
-              <li key={link}>
-                <button
-                  className={page === link ? "active" : ""}
-                  onClick={() => navigate(link)}
-                >
-                  {link}
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop CTA */}
-          <button className="nav-cta" onClick={() => navigate("Contact")}>
-            Get Started
-          </button>
-
-          {/* Hamburger */}
-          <button className="hamburger" onClick={() => setOpen((o) => !o)}>
-            <Icon name={open ? "close" : "menu"} size={24} />
-          </button>
+          <div className="nav-wordmark">
+            <span className="nav-name">AIMSTA</span>
+            <span className="nav-tagline">Efficacy for Excellence</span>
+          </div>
         </div>
+
+        {/* Desktop links */}
+        <ul className="nav-links">
+          {LINKS.map((l) => (
+            <li key={l}>
+              <button className={page === l ? "act" : ""} onClick={() => nav(l)}>
+                {l}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop CTA */}
+        <button className="nav-cta" onClick={() => nav("Contact")}>
+          Get Started
+        </button>
+
+        {/* Hamburger */}
+        <button className="hamburger" onClick={() => setOpen((o) => !o)}>
+          <Ico n={open ? "close" : "menu"} s={26} />
+        </button>
       </nav>
 
       {/* Mobile drawer */}
       {open && (
-        <div className="mobile-nav">
-          {LINKS.map((link) => (
-            <button key={link} onClick={() => navigate(link)}>
-              {link}
-            </button>
+        <div className="mob-drawer">
+          {LINKS.map((l) => (
+            <button key={l} onClick={() => nav(l)}>{l}</button>
           ))}
-          <button className="mob-cta" onClick={() => navigate("Contact")}>
+          <button className="mcta" onClick={() => nav("Contact")}>
             Get Started →
           </button>
         </div>

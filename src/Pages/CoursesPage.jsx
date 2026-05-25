@@ -1,36 +1,49 @@
-// pages/CoursesPage.jsx
-import Footer      from "../components/Footer";
-import FadeSection from "../components/FadeSection";
-import { Icon, COURSES } from "../data";
+// src/pages/CoursesPage.jsx
+import Footer    from "../components/Footer";
+import StatStrip from "../components/StatStrip";
+import Ico       from "../components/Icon";
+import { useReveal } from "../hooks";
+import { COURSES } from "../data";
 
-export default function CoursesPage({ setPage }) {
-  const nav = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); };
+const PERKS = [
+  ["🎓", "Live Sessions",      "Interactive classes with expert trainers. Real questions, real answers, in real time."],
+  ["💻", "Hands-On Projects",  "Deploy real products. Build a portfolio that proves your skills before you interview."],
+  ["📜", "Certification",      "Industry-recognised credentials that employers in 40+ countries trust."],
+  ["👥", "Peer Community",     "Join a cohort of motivated peers. Study groups, accountability, lasting connections."],
+];
+
+export default function CoursesPage({ go }) {
+  const r1 = useReveal();
+  const r2 = useReveal();
 
   return (
-    <div className="page">
-
-      {/* ── COURSE CARDS ── */}
-      <section className="section section-tinted">
-        <div className="section-inner">
-          <FadeSection className="section-header">
-            <span className="section-tag">Popular Courses</span>
-            <h2 className="section-title">Featured Training Programs</h2>
-            <p className="section-sub">
-              Choose from our most sought-after courses designed to boost your career prospects and skill set.
+    <>
+      {/* ═══════════════════════════════════ COURSE CARDS ═══ */}
+      <section className="sec sec-light">
+        <div className="sec-inner">
+          <div {...r1("sec-hd")}>
+            <span className="eyebrow eyebrow-dark">Featured Courses</span>
+            <h2 className="sec-title" style={{ color: "var(--ink)" }}>
+              Learn what{" "}
+              <span className="ital" style={{ color: "var(--jade)" }}>employers want</span>
+            </h2>
+            <p className="sec-sub" style={{ color: "#666" }}>
+              Our most popular programmes — designed with hiring managers and built to produce
+              portfolio-ready graduates.
             </p>
-          </FadeSection>
+          </div>
 
           <div className="courses-grid">
             {COURSES.map((c, i) => (
-              <FadeSection key={i}>
+              <div key={i} {...r1()} style={{ transitionDelay: `${i * .1}s` }}>
                 <div className="course-card">
                   <div className="course-thumb">
-                    <span className="course-badge-pill">{c.badge}</span>
+                    <span className="course-badge">{c.badge}</span>
                   </div>
                   <div className="course-body">
                     <div className="course-meta">
-                      <span><Icon name="clock" size={13} /> {c.weeks} Weeks</span>
-                      <span><Icon name="user"  size={13} /> {c.students} Students</span>
+                      <span><Ico n="clock" s={13} /> {c.weeks} weeks</span>
+                      <span><Ico n="users" s={13} /> {c.students} enrolled</span>
                     </div>
                     <h3>{c.title}</h3>
                     <p>{c.desc}</p>
@@ -38,59 +51,60 @@ export default function CoursesPage({ setPage }) {
                       <div className="course-price">
                         {c.price} <s>{c.orig}</s>
                       </div>
-                      <button
-                        className="enroll-btn"
-                        onClick={() => nav("Contact")}
-                      >
+                      <button className="course-enroll" onClick={() => go("Contact")}>
                         Enroll Now
                       </button>
                     </div>
                   </div>
                 </div>
-              </FadeSection>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── WHAT'S INCLUDED ── */}
-      <section className="section">
-        <div className="section-inner">
-          <FadeSection className="section-header">
-            <span className="section-tag">Every Course Includes</span>
-            <h2 className="section-title">What You Get</h2>
-            <p className="section-sub">All programs come packed with resources to maximise your learning outcomes.</p>
-          </FadeSection>
+      {/* ═══════════════════════════════════ STATS ═══ */}
+      <StatStrip />
 
-          <div className="services-grid">
-            {[
-              { icon: "graduation", title: "Live Sessions",        desc: "Interactive live classes with expert trainers — ask questions, collaborate, and learn in real time." },
-              { icon: "code",       title: "Hands-on Projects",    desc: "Build a portfolio-worthy project during the course that demonstrates your skills to employers." },
-              { icon: "award",      title: "Certificate",          desc: "Receive an industry-recognised certificate upon successful completion." },
-              { icon: "users",      title: "Community Access",     desc: "Join a private alumni network for peer support, job leads, and ongoing mentorship." },
-            ].map((item, i) => (
-              <FadeSection key={i}>
-                <div className="service-card">
-                  <div className="service-icon"><Icon name={item.icon} size={22} /></div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
+      {/* ═══════════════════════════════════ PERKS ═══ */}
+      <section className="sec sec-mid">
+        <div className="sec-inner">
+          <div {...r2("sec-hd")}>
+            <span className="eyebrow eyebrow-gold">What's Included</span>
+            <h2 className="sec-title" style={{ color: "var(--cream)" }}>
+              Every course <span className="ital">comes with</span>
+            </h2>
+            <p className="sec-sub sec-sub-light">
+              Enrolment isn't just access to content — it's access to an entire ecosystem of support.
+            </p>
+          </div>
+
+          <div className="serv-grid">
+            {PERKS.map(([emoji, title, desc], i) => (
+              <div key={i} {...r2()} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="serv-card">
+                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{emoji}</div>
+                  <h3>{title}</h3>
+                  <p>{desc}</p>
                 </div>
-              </FadeSection>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="cta-section">
+      {/* ═══════════════════════════════════ CTA ═══ */}
+      <section className="cta-band">
         <div className="cta-inner">
-          <h2>Ready to Enroll?</h2>
-          <p>Spots fill up quickly. Secure your place today and start your transformation.</p>
-          <button className="btn-white" onClick={() => nav("Contact")}>Get in Touch</button>
+          <h2>Spots fill <em>fast</em></h2>
+          <p>Our cohorts are intentionally small to maximise mentorship. Reserve your place today.</p>
+          <button className="btn-cream" onClick={() => go("Contact")}>
+            Reserve My Spot <Ico n="arrow" s={16} />
+          </button>
         </div>
       </section>
 
-      <Footer setPage={setPage} />
-    </div>
+      <Footer go={go} />
+    </>
   );
 }

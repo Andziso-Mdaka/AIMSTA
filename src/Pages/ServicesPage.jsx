@@ -1,80 +1,88 @@
-// pages/ServicesPage.jsx
-import Footer      from "../components/Footer";
-import FadeSection from "../components/FadeSection";
-import { Icon, SERVICES } from "../data";
+// src/pages/ServicesPage.jsx
+import Footer from "../components/Footer";
+import Ico    from "../components/Icon";
+import { useReveal } from "../hooks";
+import { SERVICES } from "../data";
 
-export default function ServicesPage({ setPage }) {
-  const nav = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); };
+const INCLUDED = [
+  ["🎯", "Personalised Mentorship", "One-on-one sessions with your assigned industry mentor throughout the programme."],
+  ["💼", "Portfolio Projects",      "Build real deliverables you can show in interviews — not toy exercises."],
+  ["🌐", "Alumni Network",          "Instant access to our global community of 15,000+ graduates and hiring managers."],
+  ["📈", "Post-Course Support",     "Continued access to materials, community, and career advice after you graduate."],
+];
+
+export default function ServicesPage({ go }) {
+  const r1 = useReveal();
+  const r2 = useReveal();
 
   return (
-    <div className="page">
-
-      {/* ── SERVICES GRID ── */}
-      <section className="section section-tinted">
-        <div className="section-inner">
-          <FadeSection className="section-header">
-            <span className="section-tag">What We Offer</span>
-            <h2 className="section-title">Comprehensive Learning Solutions</h2>
-            <p className="section-sub">
-              Every program is designed with industry demands in mind — ensuring the skills you gain are
-              immediately applicable in the workplace.
+    <>
+      {/* ═══════════════════════════════════ ALL SERVICES ═══ */}
+      <section className="sec sec-mid">
+        <div className="sec-inner">
+          <div {...r1("sec-hd")}>
+            <span className="eyebrow eyebrow-gold">All Programmes</span>
+            <h2 className="sec-title" style={{ color: "var(--cream)" }}>
+              Training built for <span className="ital">real outcomes</span>
+            </h2>
+            <p className="sec-sub sec-sub-light">
+              Every discipline, every skill-level — we have a programme designed to take you further.
             </p>
-          </FadeSection>
+          </div>
 
-          <div className="services-grid">
+          <div className="serv-grid">
             {SERVICES.map((s, i) => (
-              <FadeSection key={i}>
-                <div className="service-card">
-                  <div className="service-icon"><Icon name={s.icon} size={22} /></div>
+              <div key={i} {...r1()} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="serv-card">
+                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{s.icon}</div>
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>
                 </div>
-              </FadeSection>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── WHY CHOOSE US ── */}
-      <section className="section">
-        <div className="section-inner">
-          <FadeSection className="section-header">
-            <span className="section-tag">Why AIMSTA</span>
-            <h2 className="section-title">The AIMSTA Difference</h2>
-            <p className="section-sub">
-              We go beyond textbooks to deliver an education that's practical, current, and results-driven.
+      {/* ═══════════════════════════════════ WHAT'S INCLUDED ═══ */}
+      <section className="sec" style={{ background: "var(--ink)" }}>
+        <div className="sec-inner">
+          <div {...r2("sec-hd")}>
+            <span className="eyebrow eyebrow-gold">Included in Every Course</span>
+            <h2 className="sec-title" style={{ color: "var(--cream)" }}>
+              More than a <span className="ital">certificate</span>
+            </h2>
+            <p className="sec-sub sec-sub-light">
+              Every AIMSTA programme comes wrapped with the support, tools, and community that makes the difference.
             </p>
-          </FadeSection>
+          </div>
 
-          <div className="services-grid">
-            {[
-              { icon: "users",   title: "Expert-Led Training",      desc: "Every course is facilitated by seasoned industry professionals with real-world experience." },
-              { icon: "check",   title: "Certified on Completion",  desc: "Earn industry-recognised certificates that boost your CV and open doors to new opportunities." },
-              { icon: "diagram", title: "Flexible Learning Paths",  desc: "Choose self-paced, live online, or in-person formats to match your schedule and learning style." },
-              { icon: "award",   title: "Career Support",           desc: "From CV workshops to mock interviews and job placement — we stay by your side even after graduation." },
-            ].map((item, i) => (
-              <FadeSection key={i}>
-                <div className="service-card">
-                  <div className="service-icon"><Icon name={item.icon} size={22} /></div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
+          <div className="serv-grid">
+            {INCLUDED.map(([emoji, title, desc], i) => (
+              <div key={i} {...r2()} style={{ transitionDelay: `${i * .08}s` }}>
+                <div className="serv-card">
+                  <div className="serv-ico" style={{ fontSize: "1.4rem" }}>{emoji}</div>
+                  <h3>{title}</h3>
+                  <p>{desc}</p>
                 </div>
-              </FadeSection>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="cta-section">
+      {/* ═══════════════════════════════════ CTA ═══ */}
+      <section className="cta-band">
         <div className="cta-inner">
-          <h2>Not Sure Where to Start?</h2>
-          <p>Our advisors will help you choose the right program for your goals and background.</p>
-          <button className="btn-white" onClick={() => nav("Contact")}>Talk to an Advisor</button>
+          <h2>Not sure <em>where to start?</em></h2>
+          <p>Our advisors will recommend the right programme for your goals, background, and budget.</p>
+          <button className="btn-cream" onClick={() => go("Contact")}>
+            Talk to an Advisor <Ico n="arrow" s={16} />
+          </button>
         </div>
       </section>
 
-      <Footer setPage={setPage} />
-    </div>
+      <Footer go={go} />
+    </>
   );
 }

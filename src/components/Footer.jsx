@@ -1,12 +1,7 @@
-// components/Footer.jsx
-import { Icon } from "../data";
+// src/components/Footer.jsx
+import Ico from "./Icon";
 
-export default function Footer({ setPage }) {
-  const go = (p) => {
-    setPage(p);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
+export default function Footer({ go }) {
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -14,43 +9,46 @@ export default function Footer({ setPage }) {
 
           {/* Brand */}
           <div className="footer-brand">
-            <div style={{ display: "flex", alignItems: "center", gap: ".7rem", marginBottom: ".25rem" }}>
-              <div className="nav-logo-mark" style={{ width: 42, height: 42, fontSize: "1.1rem" }}>A</div>
-              <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "1.3rem", letterSpacing: 2 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: ".25rem" }}>
+              <div className="nav-emblem" style={{ width: 40, height: 40 }}>
+                <img
+                  src="/AIMSTA LOGO 2 - Copy.png"
+                  alt="AIMSTA logo"
+                  style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 8 }}
+                />
+              </div>
+              <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "1.5rem", letterSpacing: 3 }}>
                 AIMSTA
               </span>
             </div>
             <p>
-              AIMSTA is dedicated to providing world-class education and training that empowers individuals to
-              achieve excellence in their professional careers.
+              Dedicated to delivering world-class training that empowers individuals to reach their fullest
+              potential. Efficacy for Excellence — every programme, every graduate.
             </p>
             <div className="socials">
-              <a href="#" aria-label="Facebook"><Icon name="fb" /></a>
-              <a href="#" aria-label="Twitter"><Icon name="tw" /></a>
-              <a href="#" aria-label="LinkedIn"><Icon name="li" /></a>
-              <a href="#" aria-label="Instagram"><Icon name="ig" /></a>
+              {[["fb","#"],["tw","#"],["li","#"],["ig","#"]].map(([k, h]) => (
+                <a key={k} href={h} aria-label={k}><Ico n={k} /></a>
+              ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigate */}
           <div className="footer-col">
-            <h4>Quick Links</h4>
+            <h4>Navigate</h4>
             <ul>
-              <li><a onClick={() => go("Home")}>Home</a></li>
-              <li><a onClick={() => go("About")}>About Us</a></li>
-              <li><a onClick={() => go("Courses")}>Courses</a></li>
-              <li><a href="#">Blog</a></li>
+              {["Home","About","Services","Courses","Contact"].map((p) => (
+                <li key={p}><a onClick={() => go(p)}>{p}</a></li>
+              ))}
             </ul>
           </div>
 
-          {/* Programs */}
+          {/* Programmes */}
           <div className="footer-col">
-            <h4>Programs</h4>
+            <h4>Programmes</h4>
             <ul>
-              <li><a href="#">Web Development</a></li>
-              <li><a href="#">Data Science</a></li>
-              <li><a href="#">Digital Marketing</a></li>
-              <li><a href="#">Business Analytics</a></li>
+              {["Web Development","Data Science","Digital Marketing","Business Analytics","Project Management"].map((p) => (
+                <li key={p}><a href="#">{p}</a></li>
+              ))}
             </ul>
           </div>
 
@@ -66,8 +64,8 @@ export default function Footer({ setPage }) {
         </div>
 
         <div className="footer-bottom">
-          <p>© 2026 AIMSTA. All rights reserved. Efficacy for Excellence.</p>
-          <p>Designed with ♥ for future leaders</p>
+          <span>© 2026 AIMSTA. All rights reserved.</span>
+          <span>Built for future leaders · <a href="#">Privacy</a></span>
         </div>
       </div>
     </footer>
