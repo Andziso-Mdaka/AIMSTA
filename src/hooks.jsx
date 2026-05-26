@@ -1,16 +1,8 @@
-// src/hooks.js — shared React hooks
+// src/hooks.jsx — shared React hooks
 import { useRef, useEffect } from "react";
 
 /**
- * useReveal(cls)
- * Attaches an IntersectionObserver to the returned ref.
- * When the element enters the viewport, the class "in" is added
- * (pairs with .reveal / .reveal-l / .reveal-r in styles.js).
- *
- * Returns a prop-getter function: call it to get { ref, className }.
- * Optionally pass an extra class string to merge:
- *   const r = useReveal();
- *   <div {...r("sec-hd")}> …
+ * useReveal — single element reveal (used for section headers, CTA blocks)
  */
 export function useReveal(cls = "reveal") {
   const ref = useRef(null);
@@ -20,20 +12,50 @@ export function useReveal(cls = "reveal") {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("in");
-          obs.disconnect();
-        }
+        if (entry.isIntersecting) { el.classList.add("in"); obs.disconnect(); }
       },
-      { threshold: 0.1 }
+      { threshold: 0, rootMargin: "0px 0px -60px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  // returns a prop-getter so callers can do {...r()} or {...r("extra-class")}
   return (extraCls = "") => ({
     ref,
     className: [cls, extraCls].filter(Boolean).join(" "),
   });
+}
+
+/**
+ * useRevealList — reveals an array of elements individually.
+ * Returns a ref-setter: call it with the index to get a callback ref.
+ *
+ * Usage:
+ *   const setRef = useRevealList();
+ *   {items.map((item, i) => (
+ *     <div ref={setRef(i)} className="reveal" key={i}>…</div>
+ *   ))}
+ */
+export function useRevealList() {
+  const refs = useRef([]);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    refs.current.forEach((el) => { if (el) obs.observe(el); });
+    return () => obs.disconnect();
+  }, []);
+
+  // Returns a callback ref setter for a given index
+  return (i) => (el) => { refs.current[i] = el; };
 }

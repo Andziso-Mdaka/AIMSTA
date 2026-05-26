@@ -545,12 +545,17 @@ body::before{
 .footer-bottom a:hover{opacity:1}
 
 /* ═══════════════════════════════════ REVEAL ANIMATIONS ═══ */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;will-change:opacity,transform}
 .reveal.in{opacity:1;transform:none}
-.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .7s ease,transform .7s ease}
+.reveal-l{opacity:0;transform:translateX(-24px);transition:opacity .65s ease,transform .65s ease;will-change:opacity,transform}
 .reveal-l.in{opacity:1;transform:none}
-.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal-r{opacity:0;transform:translateX(24px);transition:opacity .65s ease,transform .65s ease;will-change:opacity,transform}
 .reveal-r.in{opacity:1;transform:none}
+
+/* Fallback: if JS hasn't fired yet, never hide content permanently */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}
+}
 
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 `;
