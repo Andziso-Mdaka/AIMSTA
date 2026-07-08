@@ -7,8 +7,8 @@ import { SERVICES } from "../data.jsx";
 
 const CONTACT_ITEMS = [
   ["mail",  "Email",    "info@aimsta.com"],
-  ["phone", "Phone",    "+1 (555) 123-4567"],
-  ["pin",   "Location", "New York, NY"],
+  ["phone", "Phone",    "+27 82 489 3294"],
+  ["pin",   "Location", "Pretoria, Gauteng"],
 ];
 
 export default function ContactPage({ go }) {
