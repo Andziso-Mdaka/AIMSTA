@@ -1,101 +1,67 @@
-// src/pages/CoursesPage.jsx
-import Footer    from "../components/Footer.jsx";
-import StatStrip from "../components/StatStrip.jsx";
-import Ico       from "../components/Icon.jsx";
-import { useReveal, useRevealList } from "../hooks.jsx";
-import { COURSES } from "../data.jsx";
+// src/Pages/CoursesPage.jsx — "Programmes"
+import Ico from "../components/Icon.jsx";
+import { AREAS, PROGRAMMES } from "../data.jsx";
 
-const PERKS = [
-  ["🎓","Live Sessions","Interactive classes with expert trainers. Real questions, real answers, in real time."],
-  ["💻","Hands-On Projects","Deploy real products. Build a portfolio that proves your skills before you interview."],
-  ["📜","Certification","Industry-recognised credentials that employers in 40+ countries trust."],
-  ["👥","Peer Community","Join a cohort of motivated peers. Study groups, accountability, lasting connections."],
-];
+const areaTitle = (id) => AREAS.find((a) => a.id === id)?.title;
 
 export default function CoursesPage({ go }) {
-  const rHdr1   = useReveal();
-  const rHdr2   = useReveal();
-  const setCourseRef = useRevealList();
-  const setPerkRef   = useRevealList();
-
   return (
     <>
-      {/* ═══ COURSE CARDS ═══ */}
-      <section className="sec sec-light">
-        <div className="sec-inner">
-          <div {...rHdr1("sec-hd")}>
-            <span className="eyebrow eyebrow-dark">Featured Courses</span>
-            <h2 className="sec-title" style={{ color:"var(--ink)" }}>
-              Learn what{" "}
-              <span className="ital" style={{ color:"var(--jade)" }}>employers want</span>
-            </h2>
-            <p className="sec-sub" style={{ color:"#666" }}>
-              Our most popular programmes — designed with hiring managers and built to produce portfolio-ready graduates.
+      <section className="page-head">
+        <div className="wrap page-head-grid">
+          <h1>Programmes</h1>
+          <p className="lede page-head-body">
+            Featured programmes from our training areas. Duration, format and pricing are agreed per group,
+            based on your team's size, schedule and starting level.
+          </p>
+        </div>
+      </section>
+
+      <section className="section section-flush-top" aria-label="Featured programmes">
+        <div className="wrap">
+          <ul className="programmes">
+            {PROGRAMMES.map((p) => (
+              <li key={p.title} className="programme">
+                <div className="programme-main">
+                  <h2>{p.title}</h2>
+                  <p>{p.desc}</p>
+                  <p className="programme-area">Training area: {areaTitle(p.area)}</p>
+                </div>
+                <div className="programme-side">
+                  <h3>Topics include</h3>
+                  <ul className="topic-list">
+                    {p.topics.map((t) => <li key={t}>{t}</li>)}
+                  </ul>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => go("contact", { areas: [p.area], size: "", programme: p.title })}
+                    aria-label={`Request a quote for ${p.title}`}
+                  >
+                    Request a quote
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section-tint">
+        <div className="wrap split split-center">
+          <div>
+            <h2>Need something your team can't find here?</h2>
+            <p className="body-lg">
+              These are our most requested programmes. Tell us the skills you need and we'll recommend
+              a programme built from our six training areas.
             </p>
           </div>
-          <div className="courses-grid">
-            {COURSES.map((c, i) => (
-              <div key={i} ref={setCourseRef(i)} className="reveal course-card" style={{ transitionDelay:`${i*.1}s` }}>
-                <div className="course-thumb">
-                  <span className="course-badge">{c.badge}</span>
-                </div>
-                <div className="course-body">
-                  <div className="course-meta">
-                    <span><Ico n="clock" s={13} /> {c.weeks} weeks</span>
-                    <span><Ico n="users" s={13} /> {c.students} enrolled</span>
-                  </div>
-                  <h3>{c.title}</h3>
-                  <p>{c.desc}</p>
-                  <div className="course-footer">
-                    <div className="course-price">{c.price} <s>{c.orig}</s></div>
-                    <button className="course-enroll" onClick={() => go("Contact")}>Enroll Now</button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="inline-cta">
+            <button className="btn btn-primary" onClick={() => go("contact")}>
+              Describe what you need <Ico n="arrow" s={18} />
+            </button>
           </div>
         </div>
       </section>
-
-      {/* ═══ STATS ═══ */}
-      <StatStrip />
-
-      {/* ═══ PERKS ═══ */}
-      <section className="sec sec-mid">
-        <div className="sec-inner">
-          <div {...rHdr2("sec-hd")}>
-            <span className="eyebrow eyebrow-gold">What's Included</span>
-            <h2 className="sec-title" style={{ color:"var(--cream)" }}>
-              Every course <span className="ital">comes with</span>
-            </h2>
-            <p className="sec-sub sec-sub-light">
-              Enrolment isn't just access to content — it's access to an entire ecosystem of support.
-            </p>
-          </div>
-          <div className="serv-grid">
-            {PERKS.map(([emoji, title, desc], i) => (
-              <div key={i} ref={setPerkRef(i)} className="reveal serv-card" style={{ transitionDelay:`${i*.08}s` }}>
-                <div className="serv-ico" style={{ fontSize:"1.4rem" }}>{emoji}</div>
-                <h3>{title}</h3>
-                <p>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ CTA ═══ */}
-      <section className="cta-band">
-        <div className="cta-inner">
-          <h2>Spots fill <em>fast</em></h2>
-          <p>Our cohorts are intentionally small to maximise mentorship. Reserve your place today.</p>
-          <button className="btn-cream" onClick={() => go("Contact")}>
-            Reserve My Spot <Ico n="arrow" s={16} />
-          </button>
-        </div>
-      </section>
-
-      <Footer go={go} />
     </>
   );
 }

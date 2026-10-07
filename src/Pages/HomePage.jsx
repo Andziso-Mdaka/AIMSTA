@@ -1,143 +1,138 @@
-// src/pages/HomePage.jsx
-import Footer      from "../components/Footer.jsx";
-import StatStrip   from "../components/StatStrip.jsx";
-import Ico         from "../components/Icon.jsx";
-import { useReveal, useRevealList } from "../hooks.jsx";
-import { SERVICES, TESTIMONIALS } from "../data.jsx";
+// src/Pages/HomePage.jsx
+import { useState } from "react";
+import Ico from "../components/Icon.jsx";
+import { AREAS, STEPS, TEAM_SIZES } from "../data.jsx";
 
-export default function HomePage({ go }) {
-  const rHdr   = useReveal();
-  const rSHdr  = useReveal();
-  const rTHdr  = useReveal();
-  const rCTA   = useReveal();
-  const setServiceRef  = useRevealList();
-  const setTestRef     = useRevealList();
+function Planner({ go }) {
+  const [areas, setAreas] = useState([]);
+  const [size, setSize]   = useState("");
+
+  const toggle = (id) =>
+    setAreas((a) => (a.includes(id) ? a.filter((x) => x !== id) : [...a, id]));
+
+  const submit = (e) => {
+    e.preventDefault();
+    go("contact", { areas, size });
+  };
 
   return (
-    <>
-      {/* ═══ HERO ═══ */}
-      <section className="hero">
-        <div className="hero-inner">
-          <div style={{ animation: "fadeInUp .9s ease .1s both" }}>
-            
-            <h1 className="hero-h1">
-              Transform<br />Your Future<br />with <em>AIMSTA</em>
-            </h1>
-            <p className="hero-sub">
-              Empowering ambitious professionals with cutting-edge skills and industry-proven knowledge.
-              Join 15,000+ graduates who chose excellence.
-            </p>
-            <div className="hero-btns">
-              <button className="btn-gold" onClick={() => go("Courses")}>
-                Explore Courses <Ico n="arrow" s={16} />
-              </button>
-              <button className="btn-outline" onClick={() => go("About")}>
-                <Ico n="play" s={16} /> Our Story
-              </button>
-            </div>
-            <div className="hero-metrics">
-              {[["15K+","Graduates"],["98%","Success Rate"],["50+","Expert Mentors"]].map(([n,l]) => (
-                <div key={l}>
-                  <div className="metric-num">{n}</div>
-                  <div className="metric-lbl">{l}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <form className="planner" onSubmit={submit} aria-labelledby="planner-title">
+      <h2 id="planner-title" className="planner-title">Plan training for your team</h2>
 
-          <div className="hero-panel">
-            <div className="hero-card-main">
-              <div className="hero-card-icon"><Ico n="grad" /></div>
-              <h3>Excellence in Education</h3>
-              <p>10+ years shaping careers across every industry</p>
+      <fieldset className="planner-group">
+        <legend>What should your team learn?</legend>
+        <div className="chips">
+          {AREAS.map((a) => (
+            <label key={a.id} className="chip">
+              <input type="checkbox" checked={areas.includes(a.id)} onChange={() => toggle(a.id)} />
+              <span><Ico n="check" s={14} className="chip-tick" />{a.title}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div className="planner-group">
+        <label className="field-label" htmlFor="planner-size">How many people?</label>
+        <select id="planner-size" className="input" value={size} onChange={(e) => setSize(e.target.value)}>
+          <option value="">Choose a team size</option>
+          {TEAM_SIZES.map((s) => <option key={s}>{s}</option>)}
+        </select>
+      </div>
+
+      <button type="submit" className="btn btn-primary btn-block">
+        Continue to your request <Ico n="arrow" s={18} />
+      </button>
+      <p className="planner-note">No commitment. This only starts the conversation.</p>
+    </form>
+  );
+}
+
+export default function HomePage({ go }) {
+  return (
+    <>
+      <section className="hero">
+        <div className="wrap hero-grid">
+          <div className="hero-copy">
+            <h1>Practical training that moves your team forward</h1>
+            <p className="lede">
+              AIMSTA designs and delivers professional training for South African organisations,
+              from data and software to leadership and project management, taught by people who do the work.
+            </p>
+            <div className="actions">
+              <button className="btn btn-primary" onClick={() => go("contact")}>
+                Request a proposal <Ico n="arrow" s={18} />
+              </button>
+              <button className="btn btn-secondary" onClick={() => go("programmes")}>
+                View programmes
+              </button>
             </div>
-            <div className="hero-badges-row">
-              {[
-                ["🏆","Certified","Industry-recognised credentials"],
-                ["🌍","Global","Alumni in 40+ countries"],
-                ["⚡","Fast-Track","Results within 90 days"],
-                ["🤝","Mentored","1-on-1 expert guidance"],
-              ].map(([emoji, title, sub], i) => (
-                <div className="hero-mini-card" key={title} style={{ animationDelay:`${.3+i*.1}s` }}>
-                  <div className="hmc-icon" style={{ fontSize:"1.1rem" }}>{emoji}</div>
-                  <div className="hmc-label">{title}</div>
-                  <div className="hmc-sub">{sub}</div>
-                </div>
-              ))}
-            </div>
+            <p className="hero-place"><Ico n="pin" s={16} /> Based in Pretoria, Gauteng</p>
           </div>
+          <Planner go={go} />
         </div>
       </section>
 
-      {/* ═══ STATS ═══ */}
-      <StatStrip />
-
-      {/* ═══ SERVICES ═══ */}
-      <section className="sec sec-mid">
-        <div className="sec-inner">
-          <div {...rSHdr("sec-hd")}>
-            <span className="eyebrow eyebrow-gold">What We Offer</span>
-            <h2 className="sec-title" style={{ color:"var(--cream)" }}>
-              Built for the <span className="ital">careers</span> of tomorrow
-            </h2>
-            <p className="sec-sub sec-sub-light">
-              Every programme is engineered with one goal: getting you where you want to be, faster.
-            </p>
+      <section className="section" aria-labelledby="areas-title">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 id="areas-title">Six areas of training</h2>
+            <p>Each programme can be shaped around your team's starting point and the work they need to do.</p>
           </div>
-          <div className="serv-grid">
-            {SERVICES.map((s, i) => (
-              <div key={i} ref={setServiceRef(i)} className="reveal serv-card" style={{ transitionDelay:`${i*.08}s` }}>
-                <div className="serv-ico" style={{ fontSize:"1.4rem" }}>{s.icon}</div>
+          <ul className="area-list">
+            {AREAS.map((a) => (
+              <li key={a.id} className="area">
+                <span className="area-icon"><Ico n={a.icon} s={24} /></span>
+                <div>
+                  <h3>{a.title}</h3>
+                  <p>{a.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <a className="text-link" href="#/services">
+            See all training areas <Ico n="arrow" s={16} />
+          </a>
+        </div>
+      </section>
+
+      <section className="section section-tint" aria-labelledby="steps-title">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 id="steps-title">How we work with organisations</h2>
+            <p>From your first message to the support after training ends.</p>
+          </div>
+          <ol className="steps">
+            {STEPS.map((s, i) => (
+              <li key={s.title} className="step">
+                <span className="step-num" aria-hidden="true">{i + 1}</span>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS ═══ */}
-      <section className="sec" style={{ background:"var(--ink)" }}>
-        <div className="sec-inner">
-          <div {...rTHdr("sec-hd")}>
-            <span className="eyebrow eyebrow-gold">Testimonials</span>
-            <h2 className="sec-title" style={{ color:"var(--cream)" }}>
-              Graduates who <span className="ital">transformed</span>
-            </h2>
-            <p className="sec-sub sec-sub-light">
-              Don't take our word for it — hear from the people whose careers we've changed.
+      <section className="section" aria-labelledby="why-title">
+        <div className="wrap split">
+          <div>
+            <h2 id="why-title">Trainers who practise what they teach</h2>
+            <p className="body-lg">
+              Our trainers are practitioners, not career academics. They bring the tools, habits and judgement
+              they use at work into every session, so your people learn what the job actually asks of them.
             </p>
+            <button className="btn btn-secondary" onClick={() => go("about")}>
+              About AIMSTA
+            </button>
           </div>
-          <div className="test-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} ref={setTestRef(i)} className="reveal test-card" style={{ transitionDelay:`${i*.12}s` }}>
-                <div className="stars">★★★★★</div>
-                <p className="test-txt">"{t.text}"</p>
-                <div className="test-author">
-                  <div className="test-av">{t.initials}</div>
-                  <div>
-                    <div className="test-name">{t.name}</div>
-                    <div className="test-role">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ul className="check-list">
+            <li><Ico n="check" s={18} />Curriculum refreshed with input from industry</li>
+            <li><Ico n="check" s={18} />Live project work from the first week</li>
+            <li><Ico n="check" s={18} />Mentorship alongside the training</li>
+            <li><Ico n="check" s={18} />Support that continues after the programme ends</li>
+          </ul>
         </div>
       </section>
-
-      {/* ═══ CTA ═══ */}
-      <section className="cta-band">
-        <div className="cta-inner" {...rCTA()}>
-          <h2>Ready to <em>invest</em> in yourself?</h2>
-          <p>Join thousands of professionals who chose AIMSTA and never looked back. Your next chapter starts with one decision.</p>
-          <button className="btn-cream" onClick={() => go("Contact")}>
-            Start Your Journey <Ico n="arrow" s={16} />
-          </button>
-        </div>
-      </section>
-
-      <Footer go={go} />
     </>
   );
 }

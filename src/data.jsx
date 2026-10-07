@@ -1,56 +1,60 @@
-// src/data.js — all shared content arrays
+// src/data.jsx — shared site content
+// Stats, testimonials and prices were removed: none are confirmed yet (see PRODUCT.md).
 
-export const SERVICES = [
-  { icon: "💻", title: "Technical Training",       desc: "Hands-on programs in software engineering, AI, cloud platforms, and data science led by working professionals." },
-  { icon: "📊", title: "Business Analytics",       desc: "Learn to transform raw data into strategic insight with tools like Power BI, Python, and SQL." },
-  { icon: "📣", title: "Digital Marketing",        desc: "Master SEO, paid media, content strategy, and conversion optimisation with live campaign work." },
-  { icon: "🤝", title: "Soft Skills & Leadership", desc: "Communication, negotiation, emotional intelligence, and executive presence for every stage of your career." },
-  { icon: "🗂️", title: "Project Management",      desc: "Agile, Scrum, PMP exam prep, and risk management — everything to lead complex projects with confidence." },
-  { icon: "🌍", title: "Language Training",        desc: "Business-focused language courses that prepare you to communicate globally with clarity and confidence." },
+export const CONTACT = {
+  email: "info@aimsta.com",
+  phone: "+27 82 489 3294",
+  phoneHref: "tel:+27824893294",
+  location: "Pretoria, Gauteng",
+};
+
+export const AREAS = [
+  { id: "technical",  icon: "code",   title: "Technical Training",       desc: "Software engineering, AI, cloud platforms and data science, taught hands-on by working professionals." },
+  { id: "analytics",  icon: "chart",  title: "Business Analytics",       desc: "Turn raw data into decisions with Power BI, Python and SQL, using your team's own kind of data." },
+  { id: "marketing",  icon: "signal", title: "Digital Marketing",        desc: "SEO, paid media, content strategy and conversion optimisation, practised on live campaign work." },
+  { id: "leadership", icon: "lead",   title: "Soft Skills & Leadership", desc: "Communication, negotiation, emotional intelligence and executive presence for every level of your organisation." },
+  { id: "projects",   icon: "plan",   title: "Project Management",       desc: "Agile, Scrum, PMP exam preparation and risk management, so your teams deliver complex work with confidence." },
+  { id: "language",   icon: "globe",  title: "Language Training",        desc: "Business-focused language courses that help your people communicate clearly with clients and colleagues." },
 ];
 
-export const COURSES = [
+export const PROGRAMMES = [
   {
-    badge: "Bestseller",
+    area: "technical",
     title: "Full-Stack Web Development",
-    weeks: 12, students: "2.5k",
-    price: "$499", orig: "$899",
-    desc: "From HTML fundamentals to deploying React + Node.js apps on the cloud — a career-changing deep dive.",
+    desc: "From HTML fundamentals to deploying React and Node.js applications in the cloud.",
+    topics: ["HTML, CSS & JavaScript", "React", "Node.js & APIs", "Cloud deployment"],
   },
   {
-    badge: "New Intake",
+    area: "technical",
     title: "Data Science & Machine Learning",
-    weeks: 10, students: "1.8k",
-    price: "$599", orig: "$999",
-    desc: "Python, pandas, scikit-learn, and neural networks. Build a portfolio that impresses top employers.",
+    desc: "Python, pandas, scikit-learn and neural networks, applied to realistic business problems.",
+    topics: ["Python & pandas", "Statistics", "scikit-learn", "Neural networks"],
   },
   {
-    badge: "Popular",
+    area: "marketing",
     title: "Digital Marketing Mastery",
-    weeks: 6, students: "3.2k",
-    price: "$349", orig: "$649",
-    desc: "Hands-on SEO, Google Ads, email automation, and analytics with real client campaigns.",
+    desc: "Hands-on SEO, Google Ads, email automation and analytics, worked through on real campaigns.",
+    topics: ["SEO", "Google Ads", "Email automation", "Analytics"],
   },
 ];
 
-export const TESTIMONIALS = [
-  {
-    initials: "SK", name: "Sarah Kumar", role: "Software Engineer, Google",
-    text: "AIMSTA completely changed my trajectory. The curriculum was rigorous, the mentors were exceptional, and within three months I had a role at Google.",
-  },
-  {
-    initials: "MR", name: "Michael Rodriguez", role: "Data Analyst, Microsoft",
-    text: "What sets AIMSTA apart is the hands-on depth. I worked on real data sets from day one. By graduation I had a portfolio I was genuinely proud of.",
-  },
-  {
-    initials: "EP", name: "Emily Parker", role: "Marketing Director, Amazon",
-    text: "The return on investment was immediate. My salary increased by 60% within six months of completing the digital marketing programme.",
-  },
+export const INCLUDED = [
+  { icon: "mentor",  title: "Personal mentorship",  desc: "Participants work one-on-one with an assigned industry mentor throughout the programme." },
+  { icon: "folder",  title: "Real project work",    desc: "Teams build deliverables they can use at work, not toy exercises." },
+  { icon: "live",    title: "Live sessions",        desc: "Interactive classes with practitioner trainers. Real questions, answered in real time." },
+  { icon: "cert",    title: "Certificate of completion", desc: "Participants who complete a programme receive a certificate of completion." },
+  { icon: "network", title: "Peer community",       desc: "Participants learn alongside motivated peers, with study groups and accountability." },
+  { icon: "support", title: "Support after training", desc: "Continued access to materials and advice once the programme ends." },
 ];
 
-export const STATS = [
-  ["15K+", "Students Trained"],
-  ["98%",  "Success Rate"],
-  ["50+",  "Expert Trainers"],
-  ["10+",  "Years of Excellence"],
+export const STEPS = [
+  { title: "Tell us what your team needs", desc: "Share the skills gap, the people involved and your timeline. An advisor gets back to you." },
+  { title: "Get a recommended programme",  desc: "An advisor recommends the right programme for your goals, your people's background and your budget." },
+  { title: "Train with practitioners",     desc: "Your team learns from trainers who do this work in industry, through live sessions and real projects." },
+  { title: "Keep the momentum",            desc: "Mentorship and post-training support help new skills stick once people are back at their desks." },
 ];
+
+export const TEAM_SIZES = ["1–5 people", "6–15 people", "16–50 people", "50+ people"];
+
+// Hash URL for a page id, so every page can be linked and shared.
+export const href = (id) => (id === "home" ? "#/" : `#/${id}`);

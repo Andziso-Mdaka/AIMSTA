@@ -1,71 +1,61 @@
 // src/components/Footer.jsx
-import Ico from "./Icon";
+import Ico from "./Icon.jsx";
+import { AREAS, CONTACT, href } from "../data.jsx";
 
-export default function Footer({ go }) {
+export default function Footer({ go, showClose = true }) {
   return (
     <footer className="footer">
-      <div className="footer-inner">
+      <div className="wrap">
+        {showClose && (
+        <div className="footer-close">
+          <h2>Ready to plan training for your team?</h2>
+          <p>Tell us what your people need to learn. An advisor will get back to you with a recommended programme.</p>
+          <button className="btn btn-on-dark" onClick={() => go("contact")}>
+            Request a proposal <Ico n="arrow" s={18} />
+          </button>
+        </div>
+        )}
+
         <div className="footer-grid">
-
-          {/* Brand */}
           <div className="footer-brand">
-            <div style={{ display: "flex", alignItems: "center", gap: ".75rem", marginBottom: ".25rem" }}>
-              <div className="nav-emblem" style={{ width: 40, height: 40 }}>
-                <img
-                  src="/AIMSTA_LOGO_ONLY.png"
-                  alt="AIMSTA logo"
-                  style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 8 }}
-                />
-              </div>
-              <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "1.5rem", letterSpacing: 3 }}>
-                AIMSTA
-              </span>
-            </div>
-            <p>
-              Dedicated to delivering world-class training that empowers individuals to reach their fullest
-              potential. Efficacy for Excellence — every programme, every graduate.
-            </p>
-            <div className="socials">
-              {[["fb","#"],["tw","#"],["li","#"],["ig","#"]].map(([k, h]) => (
-                <a key={k} href={h} aria-label={k}><Ico n={k} /></a>
-              ))}
+            <img src="/AIMSTA_LOGO_ONLY.png" alt="" width="44" height="44" />
+            <div>
+              <div className="footer-name">AIMSTA</div>
+              <div className="footer-tag">Efficacy for Excellence</div>
             </div>
           </div>
 
-          {/* Navigate */}
           <div className="footer-col">
-            <h4>Navigate</h4>
+            <h3>Company</h3>
             <ul>
-              {["Home","About","Services","Courses","Contact"].map((p) => (
-                <li key={p}><a onClick={() => go(p)}>{p}</a></li>
+              <li><a href={href("about")}>About</a></li>
+              <li><a href={href("services")}>Training areas</a></li>
+              <li><a href={href("programmes")}>Programmes</a></li>
+              <li><a href={href("contact")}>Contact</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h3>Training areas</h3>
+            <ul>
+              {AREAS.map((a) => (
+                <li key={a.id}><a href={href("services")}>{a.title}</a></li>
               ))}
             </ul>
           </div>
 
-          {/* Programmes */}
           <div className="footer-col">
-            <h4>Programmes</h4>
+            <h3>Contact</h3>
             <ul>
-              {["Web Development","Data Science","Digital Marketing","Business Analytics","Project Management"].map((p) => (
-                <li key={p}><a href="#">{p}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="footer-col">
-            <h4>Contact</h4>
-            <ul>
-              <li><a href="mailto:info@aimsta.com">info@aimsta.com</a></li>
-              <li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-              <li><a href="#">New York, NY</a></li>
+              <li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+              <li><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></li>
+              <li>{CONTACT.location}</li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 AIMSTA. All rights reserved.</span>
-          <span>Built for future leaders · <a href="#">Privacy</a></span>
+          <span>© {new Date().getFullYear()} AIMSTA. All rights reserved.</span>
         </div>
       </div>
     </footer>
