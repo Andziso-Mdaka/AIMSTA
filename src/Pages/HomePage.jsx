@@ -19,10 +19,7 @@ export default function HomePage({ go }) {
       <section className="hero">
         <div className="hero-inner">
           <div style={{ animation: "fadeInUp .9s ease .1s both" }}>
-            <div className="hero-eyebrow">
-              <span className="hero-eyebrow-dot" />
-              Leading Training Institute
-            </div>
+            
             <h1 className="hero-h1">
               Transform<br />Your Future<br />with <em>AIMSTA</em>
             </h1>
