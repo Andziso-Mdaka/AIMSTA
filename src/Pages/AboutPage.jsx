@@ -12,7 +12,7 @@ export default function AboutPage({ go }) {
   return (
     <>
       <section className="page-head">
-        <div className="wrap page-head-grid page-head-top">
+        <div className="wrap page-head-grid page-head-top" data-reveal>
           <div>
             <h1>We believe in learning that moves careers, and companies, forward</h1>
           </div>
@@ -31,12 +31,12 @@ export default function AboutPage({ go }) {
 
       <section className="section" aria-labelledby="principles-title">
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <h2 id="principles-title">How we approach training</h2>
           </div>
           <dl className="principles">
-            {PRINCIPLES.map(([t, d]) => (
-              <div key={t} className="principle">
+            {PRINCIPLES.map(([t, d], i) => (
+              <div key={t} className="principle" data-reveal style={{ "--d": `${(i % 2) * 80}ms` }}>
                 <dt>{t}</dt>
                 <dd>{d}</dd>
               </div>
@@ -45,18 +45,18 @@ export default function AboutPage({ go }) {
         </div>
       </section>
 
-      <section className="section section-tint">
+      <section className="section section-forest">
         <div className="wrap split split-center">
-          <div>
-            <h2>Efficacy for Excellence</h2>
+          <div data-reveal>
+            <h2 className="h-xl">Efficacy for Excellence</h2>
             <p className="body-lg">
               Our name and tagline describe the standard we hold ourselves to: training is only worth the
               investment if it changes how people work.
             </p>
           </div>
-          <div className="inline-cta">
+          <div className="inline-cta" data-reveal>
             <p>Want to know whether AIMSTA is the right fit for your team?</p>
-            <button className="btn btn-primary" onClick={() => go("contact")}>
+            <button className="btn btn-on-dark btn-lg" onClick={() => go("contact")}>
               Talk to an advisor <Ico n="arrow" s={18} />
             </button>
           </div>

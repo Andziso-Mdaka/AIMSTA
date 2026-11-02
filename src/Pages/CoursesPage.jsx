@@ -8,7 +8,7 @@ export default function CoursesPage({ go }) {
   return (
     <>
       <section className="page-head">
-        <div className="wrap page-head-grid">
+        <div className="wrap page-head-grid" data-reveal>
           <h1>Programmes</h1>
           <p className="lede page-head-body">
             Featured programmes from our training areas. Duration, format and pricing are agreed per group,
@@ -17,11 +17,11 @@ export default function CoursesPage({ go }) {
         </div>
       </section>
 
-      <section className="section section-flush-top" aria-label="Featured programmes">
+      <section className="section" aria-label="Featured programmes">
         <div className="wrap">
           <ul className="programmes">
             {PROGRAMMES.map((p) => (
-              <li key={p.title} className="programme">
+              <li key={p.title} className="programme" data-reveal>
                 <div className="programme-main">
                   <h2>{p.title}</h2>
                   <p>{p.desc}</p>
@@ -33,11 +33,11 @@ export default function CoursesPage({ go }) {
                     {p.topics.map((t) => <li key={t}>{t}</li>)}
                   </ul>
                   <button
-                    className="btn btn-secondary"
+                    className="btn btn-primary"
                     onClick={() => go("contact", { areas: [p.area], size: "", programme: p.title })}
                     aria-label={`Request a quote for ${p.title}`}
                   >
-                    Request a quote
+                    Request a quote <Ico n="arrow" s={18} />
                   </button>
                 </div>
               </li>
@@ -48,15 +48,15 @@ export default function CoursesPage({ go }) {
 
       <section className="section section-tint">
         <div className="wrap split split-center">
-          <div>
+          <div data-reveal>
             <h2>Need something your team can't find here?</h2>
             <p className="body-lg">
               These are our most requested programmes. Tell us the skills you need and we'll recommend
               a programme built from our six training areas.
             </p>
           </div>
-          <div className="inline-cta">
-            <button className="btn btn-primary" onClick={() => go("contact")}>
+          <div className="inline-cta" data-reveal>
+            <button className="btn btn-primary btn-lg" onClick={() => go("contact")}>
               Describe what you need <Ico n="arrow" s={18} />
             </button>
           </div>

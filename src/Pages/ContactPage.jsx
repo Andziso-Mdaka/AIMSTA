@@ -77,9 +77,9 @@ export default function ContactPage({ brief }) {
   const describe = (k) => (errors[k] ? `c-${k}-error` : undefined);
 
   return (
-    <section className="section contact">
+    <section className="contact">
       <div className="wrap contact-grid">
-        <div className="contact-info">
+        <div className="contact-info" data-reveal>
           <h1>Request a training proposal</h1>
           <p className="lede">
             Tell us about your team and what they need to learn. An advisor will get back to you
@@ -164,7 +164,7 @@ export default function ContactPage({ brief }) {
                   value={form.message} onChange={upd} aria-invalid={!!errors.message} aria-describedby={describe("message")} />
               </Field>
 
-              <button type="submit" className="btn btn-primary btn-block">
+              <button type="submit" className="btn btn-primary btn-block btn-lg">
                 Send request <Ico n="arrow" s={18} />
               </button>
               <p className="form-note">Sending opens your email app with your request filled in.</p>

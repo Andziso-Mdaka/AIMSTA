@@ -1,4 +1,4 @@
-// src/components/Navbar.jsx
+// src/components/Navbar.jsx — sits on the forest page head, turns solid once scrolled
 import { useEffect, useState } from "react";
 import Ico from "./Icon.jsx";
 import { href } from "../data.jsx";
@@ -14,6 +14,10 @@ const LINKS = [
 export default function Navbar({ page, go }) {
   const [raised, setRaised] = useState(false);
   const [open, setOpen]     = useState(false);
+  const [shown, setShown]   = useState(page);
+
+  // Close the menu when the page changes by any route (back/forward included).
+  if (shown !== page) { setShown(page); setOpen(false); }
 
   useEffect(() => {
     const fn = () => setRaised(window.scrollY > 8);
@@ -26,14 +30,18 @@ export default function Navbar({ page, go }) {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
-    <header className={`nav${raised || open ? " is-raised" : ""}`}>
+    <header className={`nav${raised ? " is-raised" : ""}${open ? " is-open" : ""}`}>
       <div className="nav-inner">
         <a className="brand" href="#/" aria-label="AIMSTA home">
-          <img src="/AIMSTA_LOGO_ONLY.png" alt="" width="40" height="40" />
+          <span className="brand-mark"><img src="/AIMSTA_LOGO_ONLY.png" alt="" width="34" height="34" /></span>
           <span className="brand-text">
             <span className="brand-name">AIMSTA</span>
             <span className="brand-tag">Efficacy for Excellence</span>
@@ -50,8 +58,8 @@ export default function Navbar({ page, go }) {
           </ul>
         </nav>
 
-        <button className="btn btn-primary btn-sm nav-cta" onClick={() => go("contact")}>
-          Request a proposal
+        <button className="btn btn-on-dark btn-sm nav-cta" onClick={() => go("contact")}>
+          Request a proposal <Ico n="arrow" s={16} />
         </button>
 
         <button
@@ -68,13 +76,15 @@ export default function Navbar({ page, go }) {
       {open && (
         <div className="mobile-menu" id="mobile-menu">
           <ul>
-            {[...LINKS, ["contact", "Contact"]].map(([id, label]) => (
-              <li key={id}>
-                <a href={href(id)} aria-current={page === id ? "page" : undefined} onClick={() => setOpen(false)}>{label}</a>
+            {[...LINKS, ["contact", "Contact"]].map(([id, label], i) => (
+              <li key={id} style={{ "--i": i }}>
+                <a href={href(id)} aria-current={page === id ? "page" : undefined} onClick={() => setOpen(false)}>
+                  {label} <Ico n="arrow" s={22} />
+                </a>
               </li>
             ))}
           </ul>
-          <button className="btn btn-primary" onClick={() => { setOpen(false); go("contact"); }}>
+          <button className="btn btn-on-dark btn-block" onClick={() => { setOpen(false); go("contact"); }}>
             Request a proposal <Ico n="arrow" s={18} />
           </button>
         </div>

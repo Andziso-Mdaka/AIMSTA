@@ -6,7 +6,7 @@ export default function ServicesPage({ go }) {
   return (
     <>
       <section className="page-head">
-        <div className="wrap page-head-grid">
+        <div className="wrap page-head-grid" data-reveal>
           <h1>Training areas</h1>
           <p className="lede page-head-body">
             Six disciplines, each delivered by practitioners and shaped around what your team already knows
@@ -15,11 +15,11 @@ export default function ServicesPage({ go }) {
         </div>
       </section>
 
-      <section className="section section-flush-top" aria-label="All training areas">
+      <section className="section" aria-label="All training areas">
         <div className="wrap">
           <ul className="service-rows">
             {AREAS.map((a) => (
-              <li key={a.id} className="service-row">
+              <li key={a.id} className="service-row" data-reveal>
                 <span className="area-icon"><Ico n={a.icon} s={24} /></span>
                 <h2>{a.title}</h2>
                 <p>{a.desc}</p>
@@ -38,14 +38,15 @@ export default function ServicesPage({ go }) {
 
       <section className="section section-tint" aria-labelledby="included-title">
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <h2 id="included-title">Included with every programme</h2>
             <p>Your team gets more than course content: the support around it is what makes the learning stick.</p>
           </div>
           <ul className="included">
-            {INCLUDED.map((f) => (
-              <li key={f.title} className="included-item">
-                <h3><Ico n={f.icon} s={20} className="included-icon" />{f.title}</h3>
+            {INCLUDED.map((f, i) => (
+              <li key={f.title} className="included-item" data-reveal style={{ "--d": `${(i % 3) * 70}ms` }}>
+                <Ico n={f.icon} s={30} className="included-icon" />
+                <h3>{f.title}</h3>
                 <p>{f.desc}</p>
               </li>
             ))}

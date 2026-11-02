@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/styles.css"
+        ],
+        "createdAt": "2026-11-02T19:38:10.470Z",
+        "reason": "Claude triage: .page-head::after is a full-width 8px bottom bar that draws in left to right, not a one-side card accent"
+      }
+    ]
+  }
+}

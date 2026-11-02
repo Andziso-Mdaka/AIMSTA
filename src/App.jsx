@@ -36,6 +36,24 @@ export default function App() {
     window.scrollTo({ top: 0 });
   }, [page]);
 
+  // Scroll reveals: elements marked data-reveal rise in once as they enter the viewport.
+  // Content stays visible without JS or under reduced motion (see .js-reveal in styles.css).
+  useEffect(() => {
+    const els = document.querySelectorAll("[data-reveal]:not(.is-in)");
+    if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      els.forEach((el) => el.classList.add("is-in"));
+      return;
+    }
+    document.documentElement.classList.add("js-reveal");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [page]);
+
   const go = (id, data) => {
     if (data) setBrief(data);
     if (id === page) window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,7 +72,7 @@ export default function App() {
       </a>
       <Navbar page={page} go={go} />
       <main id="main" tabIndex={-1}>
-        <Component go={go} brief={brief} />
+        <Component key={page} go={go} brief={brief} />
       </main>
       <Footer go={go} showClose={page !== "contact"} />
     </>

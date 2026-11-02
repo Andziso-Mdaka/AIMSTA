@@ -11,22 +11,26 @@ Whole marketing site (Home, About, Services, Programmes, Contact). Mode: Persuad
 
 ## Audience and job
 
-South African company buyers (HR, L&D, line managers) evaluating a training provider for their staff. Action: request a training proposal. Proof: no confirmed stats, testimonials, prices or client logos exist; all removed rather than shown as fact. Contact: info@aimsta.com, +27 82 489 3294, Pretoria.
+South African company buyers (HR, L&D, line managers) evaluating a training provider for their staff. Action: request a training proposal. Proof: no confirmed stats, testimonials, prices or client logos exist; none are shown. Contact: info@aimsta.com, +27 82 489 3294, Pretoria.
+
+## Confirmed answers (2026-11-02 redesign)
+
+User asked for a modern, dynamic redesign with bold fonts, keeping the colour scheme and all wording. Chose: heavy grotesk headlines, lively motion, forest green allowed to fill whole sections.
 
 ## Direction contract
 
-THESIS: Category standard, played straight at GIBS / GA Enterprise craft. Refuses the incumbent's dark-green "luxury" costume, emoji icon tiles, eyebrow labels and unverified hero metrics.
+THESIS: Momentum. Training that moves teams forward, told with heavy expanded type and motion that always travels forward (left to right, bottom to top). Refuses the previous quiet serif ledger and the stock SaaS card grid.
 
-OWN-WORLD: Daylight institutional. Near-white ground with a faint green tint, deep forest ink, one accent: logo green (darkened for AA) used only for actions and links. One forest band for the closing CTA and footer. Source Serif 4 headings echo the logo's serif wordmark; Public Sans for UI and body. Hairline rules, 8px radii, authored line icons.
+OWN-WORLD: Same palette (logo green #0a7a43, forest #0c2a1d, daylight ground #f7f9f7, pale sage, brand tint). Forest fills every page head; logo green fills the marquee band and the closing CTA band. Archivo Variable at 800-900, stretched to 112-125% width, tight tracking; Public Sans for body and UI. Big rows that flood forest on hover, 14px radii, authored line icons.
 
-STORY: The buyer sees what AIMSTA trains, for which teams, how an engagement works, and requests a proposal in under a minute.
+STORY: The buyer sees in one viewport what AIMSTA trains and starts a brief in the planner; scrolls through six areas, a four-step engagement, and closes on a proposal request.
 
-FIRST VIEWPORT: Left 7 columns: serif headline about training teams, one-sentence subcopy, primary "Request a proposal", secondary "View programmes". Right 5 columns: a working "Plan training for your team" panel: training-area chips, team-size select, submit that opens Contact prefilled.
+FIRST VIEWPORT: Full-bleed forest. Left 7 columns: headline at up to 5.5rem, the phrase "moves your team forward" with a logo-green highlight that sweeps in behind it; lede; white "Request a proposal" plus outline "View programmes". Right 5 columns: the white planner panel rising in. Below the fold edge, the green marquee of training areas begins.
 
-FORM: Canon (category standard), chosen by the user from the direction round; seed key e6390b78.
+FORM: User-pinned (heavy grotesk, lively motion, bold forest); no concept roll run because type, palette, copy and motion were all pinned by the user. Code-led.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
 ## Memorable moment
 
-The hero planner carries its choices through to the enquiry form, so the first click is already the start of the brief.
+The highlight sweep across "moves your team forward", then the planner carrying its choices into the enquiry form.
