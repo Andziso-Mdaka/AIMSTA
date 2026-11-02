@@ -21,13 +21,16 @@ export default function Footer({ go, showClose = true }) {
 
       <div className="wrap">
         <div className="footer-grid">
-          <div className="footer-brand">
+          <a
+            className="footer-brand" href="#/" aria-label="AIMSTA home"
+            onClick={(e) => { e.preventDefault(); go("home"); }}
+          >
             <span className="brand-mark"><img src="/AIMSTA_LOGO_ONLY.png" alt="" width="40" height="40" /></span>
             <div>
               <div className="footer-name">AIMSTA</div>
               <div className="footer-tag">Efficacy for Excellence</div>
             </div>
-          </div>
+          </a>
 
           <div className="footer-col">
             <h3>Company</h3>

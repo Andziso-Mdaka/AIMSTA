@@ -126,7 +126,7 @@ export default function HomePage({ go }) {
             </div>
             <p className="hero-place"><Ico n="pin" s={16} /> Based in Pretoria, Gauteng</p>
           </div>
-          <Planner go={go} />
+          <div className="planner-wrap"><Planner go={go} /></div>
         </div>
       </section>
 
@@ -140,7 +140,7 @@ export default function HomePage({ go }) {
           </div>
           <ul className="area-list">
             {AREAS.map((a, i) => (
-              <li key={a.id} data-reveal style={{ "--d": `${(i % 3) * 60}ms` }}>
+              <li key={a.id} data-reveal="left" style={{ "--d": `${i * 70}ms` }}>
                 <a className="area" href={href("services")}>
                   <span className="area-icon"><Ico n={a.icon} s={28} /></span>
                   <h3>{a.title}</h3>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Ico from "./Icon.jsx";
 import { href } from "../data.jsx";
+import { lockScroll } from "../smoothScroll.js";
 
 const LINKS = [
   ["home", "Home"],
@@ -31,16 +32,21 @@ export default function Navbar({ page, go }) {
     const onKey = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    lockScroll(true);
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      lockScroll(false);
     };
   }, [open]);
 
   return (
     <header className={`nav${raised ? " is-raised" : ""}${open ? " is-open" : ""}`}>
       <div className="nav-inner">
-        <a className="brand" href="#/" aria-label="AIMSTA home">
+        <a
+          className="brand" href="#/" aria-label="AIMSTA home"
+          onClick={(e) => { e.preventDefault(); setOpen(false); go("home"); }}
+        >
           <span className="brand-mark"><img src="/AIMSTA_LOGO_ONLY.png" alt="" width="34" height="34" /></span>
           <span className="brand-text">
             <span className="brand-name">AIMSTA</span>
@@ -74,7 +80,7 @@ export default function Navbar({ page, go }) {
       </div>
 
       {open && (
-        <div className="mobile-menu" id="mobile-menu">
+        <div className="mobile-menu" id="mobile-menu" data-lenis-prevent>
           <ul>
             {[...LINKS, ["contact", "Contact"]].map(([id, label], i) => (
               <li key={id} style={{ "--i": i }}>

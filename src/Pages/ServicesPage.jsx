@@ -19,7 +19,7 @@ export default function ServicesPage({ go }) {
         <div className="wrap">
           <ul className="service-rows">
             {AREAS.map((a) => (
-              <li key={a.id} className="service-row" data-reveal>
+              <li key={a.id} className="service-row" data-reveal="left">
                 <span className="area-icon"><Ico n={a.icon} s={24} /></span>
                 <h2>{a.title}</h2>
                 <p>{a.desc}</p>

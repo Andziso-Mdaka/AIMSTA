@@ -2,11 +2,13 @@
 import { useEffect, useState } from "react";
 import Navbar       from "./components/Navbar.jsx";
 import Footer       from "./components/Footer.jsx";
+import ScrollTop    from "./components/ScrollTop.jsx";
 import HomePage     from "./Pages/HomePage.jsx";
 import AboutPage    from "./Pages/AboutPage.jsx";
 import ServicesPage from "./Pages/ServicesPage.jsx";
 import CoursesPage  from "./Pages/CoursesPage.jsx";
 import ContactPage  from "./Pages/ContactPage.jsx";
+import { startSmoothScroll, scrollToTop } from "./smoothScroll.js";
 
 const PAGES = [
   { id: "home",       label: "Home",       Component: HomePage,     title: "AIMSTA | Professional training for South African teams" },
@@ -25,6 +27,8 @@ export default function App() {
   const [page, setPage]   = useState(fromHash);
   const [brief, setBrief] = useState(null); // carried from the home planner into the contact form
 
+  useEffect(() => startSmoothScroll(), []);
+
   useEffect(() => {
     const onHash = () => setPage(fromHash());
     window.addEventListener("hashchange", onHash);
@@ -33,7 +37,7 @@ export default function App() {
 
   useEffect(() => {
     document.title = PAGES.find((p) => p.id === page).title;
-    window.scrollTo({ top: 0 });
+    scrollToTop({ immediate: true });
   }, [page]);
 
   // Scroll reveals: elements marked data-reveal rise in once as they enter the viewport.
@@ -56,7 +60,7 @@ export default function App() {
 
   const go = (id, data) => {
     if (data) setBrief(data);
-    if (id === page) window.scrollTo({ top: 0, behavior: "smooth" });
+    if (id === page) scrollToTop();
     else window.location.hash = id === "home" ? "/" : `/${id}`;
   };
 
@@ -75,6 +79,7 @@ export default function App() {
         <Component key={page} go={go} brief={brief} />
       </main>
       <Footer go={go} showClose={page !== "contact"} />
+      <ScrollTop />
     </>
   );
 }

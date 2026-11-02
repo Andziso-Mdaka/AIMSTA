@@ -1,6 +1,7 @@
 // src/components/Icon.jsx — one line-icon family: 24px grid, 1.6 stroke, round joins
 const PATHS = {
   arrow:   <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
+  up:      <><path d="M12 19V5" /><path d="m6 11 6-6 6 6" /></>,
   check:   <path d="m5 12.5 4.5 4.5L19 7.5" />,
   menu:    <><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>,
   close:   <><path d="M6 6l12 12" /><path d="M18 6 6 18" /></>,
