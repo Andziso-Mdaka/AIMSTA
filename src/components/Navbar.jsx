@@ -20,6 +20,12 @@ export default function Navbar({ page, go }) {
   // Close the menu when the page changes by any route (back/forward included).
   if (shown !== page) { setShown(page); setOpen(false); }
 
+  // A link to the page you're already on scrolls back to the top instead of doing nothing.
+  const onLink = (e, id) => {
+    setOpen(false);
+    if (id === page) { e.preventDefault(); go(id); }
+  };
+
   useEffect(() => {
     const fn = () => setRaised(window.scrollY > 8);
     fn();
@@ -58,7 +64,7 @@ export default function Navbar({ page, go }) {
           <ul className="nav-links">
             {LINKS.map(([id, label]) => (
               <li key={id}>
-                <a href={href(id)} aria-current={page === id ? "page" : undefined}>{label}</a>
+                <a href={href(id)} aria-current={page === id ? "page" : undefined} onClick={(e) => onLink(e, id)}>{label}</a>
               </li>
             ))}
           </ul>
@@ -84,7 +90,7 @@ export default function Navbar({ page, go }) {
           <ul>
             {[...LINKS, ["contact", "Contact"]].map(([id, label], i) => (
               <li key={id} style={{ "--i": i }}>
-                <a href={href(id)} aria-current={page === id ? "page" : undefined} onClick={() => setOpen(false)}>
+                <a href={href(id)} aria-current={page === id ? "page" : undefined} onClick={(e) => onLink(e, id)}>
                   {label} <Ico n="arrow" s={22} />
                 </a>
               </li>
